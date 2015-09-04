@@ -4,9 +4,9 @@ Comprehensive MIME type mapping API based on mime-db module.
 
 ## Install
 
-Install with [npm](http://github.com/isaacs/npm):
+Install with [npm](http://github.com/isaacs/npm) (mime-db is optional):
 
-    npm install mime
+    npm install mime mime-db
 
 ## Contributing / Testing
 
@@ -23,13 +23,18 @@ E.g.
 
 ## API - Queries
 
+### Mime
+This module does not include the mime types database.  Either supply your own or include the [mime-db](https://github.com/jshttp/mime-db).  Construct a new mime type lookup service by supplying a mime type database.
+
+```js
+var MimeLookup = require('mime');
+var mime = new MimeLookup(require('mime-db'));
+```
+
 ### mime.lookup(path)
 Get the mime type associated with a file, if no mime type is found `application/octet-stream` is returned. Performs a case-insensitive lookup using the extension in `path` (the substring after the last '/' or '.').  E.g.
 
 ```js
-var mime = require('mime');
-
-mime.lookup('/path/to/file.txt');         // => 'text/plain'
 mime.lookup('file.txt');                  // => 'text/plain'
 mime.lookup('.TXT');                      // => 'text/plain'
 mime.lookup('htm');                       // => 'text/html'

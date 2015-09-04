@@ -2,9 +2,11 @@
  * Usage: node test.js
  */
 
-var mime = require('../mime');
+var MimeLookup = require('../mime');
 var assert = require('assert');
 var path = require('path');
+
+var mime = new MimeLookup(require('mime-db'));
 
 //
 // Test mime lookups
@@ -52,7 +54,7 @@ assert.deepEqual(['qwerty/qwerty'], mime.glob('qwerty/qwerty'));
 
 assert.equal('application/font-woff', mime.lookup('file.woff'));
 assert.equal('application/octet-stream', mime.lookup('file.buffer'));
-assert.equal('audio/mp4', mime.lookup('file.m4a'));
+assert.equal('audio/x-m4a', mime.lookup('file.m4a'));
 assert.equal('font/opentype', mime.lookup('file.otf'));
 
 //
@@ -62,5 +64,12 @@ assert.equal('font/opentype', mime.lookup('file.otf'));
 assert.equal('UTF-8', mime.charsets.lookup('text/plain'));
 assert.equal(undefined, mime.charsets.lookup(mime.types.js));
 assert.equal('fallback', mime.charsets.lookup('application/octet-stream', 'fallback'));
+
+// Test without defaults
+
+mime = new MimeLookup();
+
+assert.deepEqual(mime.types, {});
+assert.deepEqual(mime.extensions, {});
 
 console.log('\nAll tests passed');

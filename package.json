@@ -29,8 +29,7 @@
     "mime-db": "^1.2.0"
   },
   "scripts": {
-    "prepublish": "node build/build.js > types.json",
-    "test": "node build/test.js"
+    "test": "node test/test.js"
   },
   "keywords": [
     "util",

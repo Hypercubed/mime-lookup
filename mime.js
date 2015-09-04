@@ -1,12 +1,16 @@
-var path = require('path');
 var fs = require('fs');
 
-function Mime() {
+function Mime(db) {
   // Map of extension -> mime type
   this.types = Object.create(null);
 
   // Map of mime type -> extension
   this.extensions = Object.create(null);
+
+  if (typeof db === 'object') {
+    this.define(db);
+    this.default_type = this.lookup('bin');
+  }
 }
 
 /**
@@ -21,6 +25,9 @@ function Mime() {
 Mime.prototype.define = function (map) {
   for (var type in map) {
     var exts = map[type];
+    if (!Array.isArray(exts) && exts.extensions) {
+      exts = exts.extensions;
+    }
     for (var i = 0; i < exts.length; i++) {
       if (process.env.DEBUG_MIME && this.types[exts]) {
         console.warn(this._loading.replace(/.*\//, ''), 'changes "' + exts[i] + '" extension type from ' +
@@ -101,29 +108,14 @@ Mime.prototype.glob = function (pattern) {
   return result;
 }
 
-// Default instance
-var mime = new Mime();
-
-// Define built-in types
-mime.define(require('./types.json'));
-
-// Default type
-mime.default_type = mime.lookup('bin');
-
-//
-// Additional API specific to the default instance
-//
-
-mime.Mime = Mime;
-
 /**
  * Lookup a charset based on mime type.
  */
-mime.charsets = {
+Mime.prototype.charsets = {
   lookup: function(mimeType, fallback) {
     // Assume text types are utf8
     return (/^text\//).test(mimeType) ? 'UTF-8' : fallback;
   }
 };
 
-module.exports = mime;
+module.exports = Mime;
