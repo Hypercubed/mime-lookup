@@ -1,0 +1,5 @@
+*
+!src
+!mime-lookup.*
+!README.md
+!package.json

@@ -19,7 +19,7 @@ Install with [npm](http://github.com/isaacs/npm) (mime-db is optional):
 npm install mime mime-db
 ```
 
-**mine-db is optional and only needed it ypu wish to use the mime-db mime-type datadase.**
+**mine-db is optional and only needed it you wish to use the mime-db mime-type database.**
 
 ## Contributing / Testing
 
