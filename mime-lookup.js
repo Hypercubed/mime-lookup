@@ -1,5 +1,3 @@
-var fs = require('fs');
-
 function MimeLookup(db) {
   // Map of extension -> mime type
   this.types = Object.create(null);
@@ -42,32 +40,6 @@ MimeLookup.prototype.define = function (map) {
       this.extensions[type] = exts[0];
     }
   }
-};
-
-/**
- * Load an Apache2-style ".types" file
- *
- * This may be called multiple times (it's expected).  Where files declare
- * overlapping types/extensions, the last file wins.
- *
- * @param file (String) path of file to load.
- */
-MimeLookup.prototype.load = function(file) {
-  this._loading = file;
-  // Read file and split into lines
-  var map = {},
-      content = fs.readFileSync(file, 'ascii'),
-      lines = content.split(/[\r\n]+/);
-
-  lines.forEach(function(line) {
-    // Clean up whitespace/comments, and split into fields
-    var fields = line.replace(/\s*#.*|^\s*|\s*$/g, '').split(/\s+/);
-    map[fields.shift()] = fields;
-  });
-
-  this.define(map);
-
-  this._loading = null;
 };
 
 /**
