@@ -2,10 +2,9 @@
  * Usage: node test.js
  */
 
-var MimeLookup = require('../mime');
 var assert = require('assert');
-var path = require('path');
 
+var MimeLookup = require('../mime-lookup');
 var mime = new MimeLookup(require('mime-db'));
 
 //

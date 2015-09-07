@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-function Mime(db) {
+function MimeLookup(db) {
   // Map of extension -> mime type
   this.types = Object.create(null);
 
@@ -22,7 +22,7 @@ function Mime(db) {
  *
  * @param map (Object) type definitions
  */
-Mime.prototype.define = function (map) {
+MimeLookup.prototype.define = function (map) {
   for (var type in map) {
     var exts = map[type];
     if (!Array.isArray(exts) && exts.extensions) {
@@ -52,7 +52,7 @@ Mime.prototype.define = function (map) {
  *
  * @param file (String) path of file to load.
  */
-Mime.prototype.load = function(file) {
+MimeLookup.prototype.load = function(file) {
   this._loading = file;
   // Read file and split into lines
   var map = {},
@@ -73,7 +73,7 @@ Mime.prototype.load = function(file) {
 /**
  * Lookup a mime type based on extension
  */
-Mime.prototype.lookup = function(path, fallback) {
+MimeLookup.prototype.lookup = function(path, fallback) {
   var ext = path.replace(/.*[\.\/\\]/, '').toLowerCase();
 
   return this.types[ext] || fallback || this.default_type;
@@ -82,7 +82,7 @@ Mime.prototype.lookup = function(path, fallback) {
 /**
  * Return file extension associated with a mime type
  */
-Mime.prototype.extension = function(mimeType) {
+MimeLookup.prototype.extension = function(mimeType) {
   var type = mimeType.match(/^\s*([^;\s]*)(?:;|\s|$)/)[1].toLowerCase();
   return this.extensions[type];
 };
@@ -90,7 +90,7 @@ Mime.prototype.extension = function(mimeType) {
 /**
  * Return all MIME types which matching a pattern
  */
-Mime.prototype.glob = function (pattern) {
+MimeLookup.prototype.glob = function (pattern) {
   if (pattern == '*/*')
     return ['application/octet-stream'];
 
@@ -111,11 +111,11 @@ Mime.prototype.glob = function (pattern) {
 /**
  * Lookup a charset based on mime type.
  */
-Mime.prototype.charsets = {
+MimeLookup.prototype.charsets = {
   lookup: function(mimeType, fallback) {
     // Assume text types are utf8
     return (/^text\//).test(mimeType) ? 'UTF-8' : fallback;
   }
 };
 
-module.exports = Mime;
+module.exports = MimeLookup;
