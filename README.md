@@ -36,13 +36,13 @@ This module does not include the mime types database.  Either supply your own or
 #### Using [mime-db](https://github.com/jshttp/mime-db)
 
 ```js
-var MimeLookup = require('mime');
+var MimeLookup = require('mime-lookup');
 var mime = new MimeLookup(require('mime-db'));
 ```
 
 #### Using your own types
 ```js
-var MimeLookup = require('mime');
+var MimeLookup = require('mime-lookup');
 var mime = new MimeLookup(yourDb);
 ```
 
