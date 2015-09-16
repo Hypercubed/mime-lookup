@@ -1,4 +1,11 @@
-function MimeLookup(db) {
+/**
+ * MimeLookup constructor
+ *
+ * e.g. var mime = new MimeLookup(require('mime-db'));
+ *
+ * @param db (Object) type definitions
+ */
+ function MimeLookup(db) {
   // Map of extension -> mime type
   this.types = Object.create(null);
 
