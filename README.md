@@ -16,7 +16,7 @@ Comprehensive MIME type mapping API based on [broofa/node-mime](https://github.c
 Install with [npm](http://github.com/isaacs/npm) (mime-db is optional):
 
 ```bash
-npm install mime mime-db
+npm install mime-lookup mime-db
 ```
 
 **mine-db is optional and only needed it you wish to use the mime-db mime-type database.**
@@ -36,13 +36,13 @@ This module does not include the mime types database.  Either supply your own or
 #### Using [mime-db](https://github.com/jshttp/mime-db)
 
 ```js
-var MimeLookup = require('mime');
+var MimeLookup = require('mime-lookup');
 var mime = new MimeLookup(require('mime-db'));
 ```
 
 #### Using your own types
 ```js
-var MimeLookup = require('mime');
+var MimeLookup = require('mime-lookup');
 var mime = new MimeLookup(yourDb);
 ```
 
