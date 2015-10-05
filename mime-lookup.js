@@ -34,7 +34,7 @@ MimeLookup.prototype.define = function (map) {
       exts = exts.extensions;
     }
     for (var i = 0; i < exts.length; i++) {
-      if (process.env.DEBUG_MIME && this.types[exts]) {
+      if (process && process.env.DEBUG_MIME && this.types[exts]) {
         console.warn(this._loading.replace(/.*\//, ''), 'changes "' + exts[i] + '" extension type from ' +
           this.types[exts] + ' to ' + type);
       }
