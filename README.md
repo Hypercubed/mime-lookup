@@ -1,6 +1,6 @@
 # mime-lookup
 
-Comprehensive MIME type mapping API based on [broofa/node-mime](https://github.com/APIs-guru/mime) module.
+Comprehensive MIME type mapping API based on [broofa/node-mime](https://github.com/broofa/node-mime) module.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Hypercubed/mime-lookup/blob/master/LICENSE)
 
@@ -124,7 +124,7 @@ mime.extension('text/x-some-format'); // => 'x-sf'
 
 ## Acknowledgements
 
-This code is based on [broofa/node-mime](https://github.com/APIs-guru/mime) with additions from  [APIs-guru](https://github.com/APIs-guru/node-mime).
+This code is based on [broofa/node-mime](https://github.com/broofa/node-mime) with additions from  [APIs-guru](https://github.com/APIs-guru/node-mime).
 
 ## License
 
